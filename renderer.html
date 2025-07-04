@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Uygulaması</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fd;
+      min-height: 100vh;
+      margin: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .app-header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 15px;
+    }
+
+    .header-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: #f8f9fd;
+      color: #667eea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .header-btn:hover {
+      background: #eef0fa;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .dashboard-header {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .dashboard-subtitle {
+      color: #666;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .test-table {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .table-header {
+      display: flex;
+      background: #f8f9fd;
+      padding: 16px 20px;
+      font-weight: 600;
+      color: #555;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .table-row {
+      display: flex;
+      padding: 20px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.2s ease;
+      align-items: center;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .table-row:hover {
+      background: #f8f9fd;
+    }
+
+    .table-cell {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    .table-cell-icon {
+      flex: 0.2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .table-cell-action {
+      flex: 0.8;
+      text-align: right;
+    }
+
+    .test-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .login-icon {
+      background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    }
+
+    .cv-icon {
+      background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+    }
+    
+    .position-icon {
+      background: linear-gradient(135deg, #0984e3 0%, #0059b3 100%);
+    }
+    
+    .users-icon {
+      background: linear-gradient(135deg, #6c5ce7 0%, #483d8b 100%);
+    }
+    
+    .roles-icon {
+      background: linear-gradient(135deg, #e17055 0%, #d35400 100%);
+    }
+    
+    .reporting-icon {
+      background: linear-gradient(135deg, #00cec9 0%, #008b8b 100%);
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn-login {
+      background: #00b894;
+      box-shadow: 0 4px 12px rgba(0, 184, 148, 0.15);
+    }
+
+    .btn-cv {
+      background: #fd79a8;
+      box-shadow: 0 4px 12px rgba(253, 121, 168, 0.15);
+    }
+    
+    .btn-position {
+      background: #0984e3;
+      box-shadow: 0 4px 12px rgba(9, 132, 227, 0.15);
+    }
+    
+    .btn-users {
+      background: #6c5ce7;
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.15);
+    }
+    
+    .btn-roles {
+      background: #e17055;
+      box-shadow: 0 4px 12px rgba(225, 112, 85, 0.15);
+    }
+    
+    .btn-reporting {
+      background: #00cec9;
+      box-shadow: 0 4px 12px rgba(0, 206, 201, 0.15);
+    }
+
+    /* Button states */
+    .btn:hover, .header-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .btn:hover {
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
+    }
+
+    .btn-login:hover {
+      box-shadow: 0 6px 16px rgba(0, 184, 148, 0.25);
+    }
+
+    .btn-cv:hover {
+      box-shadow: 0 6px 16px rgba(253, 121, 168, 0.25);
+    }
+    
+    .btn-position:hover {
+      box-shadow: 0 6px 16px rgba(9, 132, 227, 0.25);
+    }
+    
+    .btn-users:hover {
+      box-shadow: 0 6px 16px rgba(108, 92, 231, 0.25);
+    }
+    
+    .btn-roles:hover {
+      box-shadow: 0 6px 16px rgba(225, 112, 85, 0.25);
+    }
+    
+    .btn-reporting:hover {
+      box-shadow: 0 6px 16px rgba(0, 206, 201, 0.25);
+    }
+
+    .btn:active, .header-btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled, .header-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .icon {
+      font-size: 0.8rem;
+    }
+
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover:before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn .icon {
+      margin-right: 8px;
+    }
+
+    .loading {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+      color: #667eea;
+    }
+
+    .loading.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid #e3e3e3;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .result-container {
+      margin-top: 30px;
+      padding: 0;
+      border-radius: 16px;
+      background: white;
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    .result-container.active {
+      display: block;
+    }
+
+    .result-section {
+      padding: 25px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .result-section:last-child {
+      border-bottom: none;
+    }
+
+    .result-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .result-section-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .result-badge {
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #f0f0f0;
+      color: #666;
+    }
+
+    .result-badge.success {
+      background: #e6f7f0;
+      color: #00b894;
+    }
+
+    .result-badge.error {
+      background: #fee7e7;
+      color: #ff6b6b;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .result-body {
+      background: #f8f9fd;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .screenshots-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .screenshot-card {
+      background: #f8f9fd;
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 15px;
+    }
+
+    .result-content {
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+
+    /* Screenshot Section Styles */
+    .screenshot-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #667eea;
+      font-size: 0.9rem;
+    }
+
+    .screenshot-preview {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .screenshot-button {
+      position: relative;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      display: block;
+      width: 100%;
+    }
+
+    .screenshot-button:hover .screenshot-preview {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .screenshot-button:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
+    }
+
+    #loginScreenshotImg, #cvScreenshotImg {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .screenshot-button {
+      position: relative;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      display: block;
+      width: 100%;
+    }
+
+    .screenshot-button:hover .screenshot-preview {
+      transform: scale(1.02);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .screenshot-button:focus {
+      outline: 2px solid #667eea;
+      outline-offset: 2px;
+    }
+
+    #screenshotImg {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .screenshot-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(102, 126, 234, 0.8);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+      gap: 8px;
+      font-size: 0.9rem;
+      border-radius: 10px;
+    }
+
+    .screenshot-button:hover .screenshot-overlay {
+      opacity: 1;
+    }
+
+    .screenshot-overlay i {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    .modal-content {
+      position: relative;
+      margin: auto;
+      padding: 20px;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+      transition: all 0.3s ease;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close:hover,
+    .close:focus {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.1);
+      outline: none;
+    }
+
+    #modalImg {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-caption {
+      text-align: center;
+      color: white;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .modal-subtitle {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 10px;
+      }
+      
+      .close {
+        top: 10px;
+        right: 15px;
+        font-size: 30px;
+      }
+      
+      #modalImg {
+        max-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="logo">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h1>Covera</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-btn">
+            <i class="fas fa-cog"></i>
+          </button>
+          <button class="header-btn">
+            <i class="fas fa-bell"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    
+    <div class="container">
+      <div class="dashboard-header">
+        <h2>Test Otomasyon Kontrol Paneli</h2>
+        <p class="dashboard-subtitle">Test süreçlerinizi yönetin ve izleyin</p>
+      </div>
+      
+      <div class="test-table">
+        <div class="table-header">
+          <div class="table-cell table-cell-icon"></div>
+          <div class="table-cell">Test Türü</div>
+          <div class="table-cell">Açıklama</div>
+          <div class="table-cell table-cell-action">İşlem</div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon login-icon">
+              <i class="fas fa-sign-in-alt"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>Login Testi</strong></div>
+          <div class="table-cell">CVUS Portal kullanıcı giriş işlemini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="loginTestBtn" class="btn btn-login">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon cv-icon">
+              <i class="fas fa-file-upload"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>CV Yükleme Testi</strong></div>
+          <div class="table-cell">Portal üzerinden CV.pdf dosyası yükleme işlemini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="cvTestBtn" class="btn btn-cv">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon position-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>Pozisyon Testi</strong></div>
+          <div class="table-cell">İş pozisyonları oluşturma ve düzenleme işlemlerini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="positionTestBtn" class="btn btn-position">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon users-icon">
+              <i class="fas fa-users"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>Kullanıcı Testi</strong></div>
+          <div class="table-cell">Kullanıcı arama, ekleme ve yönetim işlemlerini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="usersTestBtn" class="btn btn-users">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon roles-icon">
+              <i class="fas fa-user-tag"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>Rol Testi</strong></div>
+          <div class="table-cell">Kullanıcı rolleri oluşturma ve yetkilendirme işlemlerini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="rolesTestBtn" class="btn btn-roles">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell table-cell-icon">
+            <div class="test-icon reporting-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+          </div>
+          <div class="table-cell"><strong>Raporlama Testi</strong></div>
+          <div class="table-cell">Genel raporlama modülü ve grafik görüntüleme işlemlerini test eder</div>
+          <div class="table-cell table-cell-action">
+            <button id="reportingTestBtn" class="btn btn-reporting">
+              <i class="fas fa-play icon"></i>
+              Çalıştır
+            </button>
+          </div>
+        </div>
+      </div>
+    
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <span>Test çalıştırılıyor...</span>
+    </div>
+    
+    <div id="resultContainer" class="result-container">
+      <div class="result-section">
+        <div class="result-section-header">
+          <h3>Test Sonuçları</h3>
+          <div id="resultBadge" class="result-badge">Bekliyor</div>
+        </div>
+        
+        <div id="resultHeader" class="result-header">
+          <i id="resultIcon"></i>
+          <span id="resultTitle"></span>
+        </div>
+        
+        <div class="result-body">
+          <div id="resultContent" class="result-content"></div>
+          
+          <div class="stats">
+            <div class="stat-item">
+              <div id="duration" class="stat-value">-</div>
+              <div class="stat-label">Süre</div>
+            </div>
+            <div class="stat-item">
+              <div id="status" class="stat-value">-</div>
+              <div class="stat-label">Durum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="result-section">
+        <div class="result-section-header">
+          <h3>Ekran Görüntüleri</h3>
+        </div>
+        
+        <div class="screenshots-container">
+          <!-- Login Test Screenshot Section -->
+          <div id="loginScreenshotSection" style="display: none;">
+            <div class="screenshot-header">
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Login Test</span>
+            </div>
+            <div class="screenshot-preview">
+              <button class="screenshot-button" onclick="openImageModal('login')" aria-label="Login test ekran görüntüsünü büyütmek için tıklayın">
+                <img id="loginScreenshotImg" src="" alt="Login Test Ekran Görüntüsü">
+                <div class="screenshot-overlay">
+                  <i class="fas fa-search-plus"></i>
+                  <span>Büyütmek için tıklayın</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- CV Test Screenshot Section -->
+          <div id="cvScreenshotSection" style="display: none;">
+            <div class="screenshot-header">
+              <i class="fas fa-file-upload"></i>
+              <span>CV Yükleme Test</span>
+            </div>
+            <div class="screenshot-preview">
+              <button class="screenshot-button" onclick="openImageModal('cv')" aria-label="CV test ekran görüntüsünü büyütmek için tıklayın">
+                <img id="cvScreenshotImg" src="" alt="CV Test Ekran Görüntüsü">
+                <div class="screenshot-overlay">
+                  <i class="fas fa-search-plus"></i>
+                  <span>Büyütmek için tıklayın</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeImageModal()">
+      <div class="modal-content">
+        <button class="close" onclick="closeImageModal()" aria-label="Modal'ı kapat">&times;</button>
+        <img id="modalImg" src="" alt="Test Ekran Görüntüsü">
+        <div class="modal-caption">
+          <div class="modal-title">
+            <i id="modalIcon" class="fas fa-camera"></i>
+            <span id="modalTitle">Test Ekran Görüntüsü</span>
+          </div>
+          <div id="modalSubtitle" class="modal-subtitle">Test Sonucu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
