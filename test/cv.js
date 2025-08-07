@@ -19,7 +19,8 @@ const path = require('path');
   await page.screenshot({ path: 'cv_upload_success.png', fullPage: true });
 
   // 4 saniye bekle
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(2000);
 
   await browser.close();
 })();
+

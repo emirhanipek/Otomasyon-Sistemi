@@ -632,46 +632,73 @@
       z-index: 1000;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      width: 100vw;
+      height: 100vh;
+      background: #232a5c;
+      opacity: 0.98;
       animation: fadeIn 0.3s ease;
     }
 
     .modal.active {
       display: block;
     }
-
-    .modal-content {
+    .modal-content, .history-modal-content {
       position: relative;
-      margin: auto;
-      padding: 20px;
-      max-width: 90%;
-      max-height: 90%;
+      margin: 60px auto 0 auto;
+      padding: 36px 32px 32px 32px;
+      max-width: 480px;
+      min-width: 320px;
+      max-height: 80vh;
+      background: #fff;
+      color: #232a5c;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(35,42,92,0.18);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+      align-items: flex-start;
+      justify-content: flex-start;
       animation: zoomIn 0.3s ease;
+      overflow-y: auto;
     }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .history-modal-content h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #232a5c;
+      width: 100%;
+      text-align: left;
     }
-
+    .history-modal-content b {
+      color: #232a5c;
+    }
+    .history-modal-content pre {
+      background: #f8f9fd;
+      color: #232a5c;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      margin: 8px 0 0 0;
+      width: 100%;
+      overflow-x: auto;
+    }
+    .history-modal-content img {
+      margin-top: 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(35,42,92,0.10);
+      max-width: 100%;
+      display: block;
+    }
     .close {
       position: absolute;
       top: 20px;
       right: 30px;
-      color: white;
+      color: #e17055;
       font-size: 40px;
       font-weight: bold;
       cursor: pointer;
       background: none;
       border: none;
-      z-index: 1001;
+      z-index: 2001;
       transition: all 0.3s ease;
       width: 50px;
       height: 50px;
@@ -679,11 +706,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: auto;
     }
-
     .close:hover,
     .close:focus {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(35,42,92,0.08);
+      color: #e17055;
       transform: scale(1.1);
       outline: none;
     }
@@ -736,231 +764,939 @@
         max-height: 70vh;
       }
     }
+    .test-bar-wrapper {
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
+      padding: 32px 24px;
+      margin: 0 auto 32px auto;
+      max-width: 900px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .test-bar {
+      display: flex;
+      gap: 18px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn {
+      border-radius: 24px !important;
+      font-size: 1rem;
+      padding: 12px 28px;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn:active {
+      box-shadow: 0 1px 4px rgba(102, 126, 234, 0.10);
+    }
+    @media (max-width: 900px) {
+      .test-bar-wrapper {
+        padding: 18px 6px;
+        max-width: 100%;
+      }
+      .test-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+    }
+    .main-test-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+    }
+    .main-test-btn {
+      width: 220px;
+      height: 220px;
+      background: #232a5c;
+      color: #fff;
+      border: none;
+      border-radius: 32px;
+      box-shadow: 0 8px 32px rgba(35, 42, 92, 0.18);
+      font-size: 2rem;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      padding: 0;
+    }
+    .main-test-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
+    }
+    .main-test-btn i {
+      font-size: 3rem;
+    }
+    .main-test-btn span {
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .main-test-logo {
+      width: 110px;
+      height: auto;
+      margin-bottom: 18px;
+      border-radius: 18px;
+      background: transparent;
+      object-fit: contain;
+      box-shadow: none;
+    }
+    .main-test-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(35, 42, 92, 0.10);
+    }
+    .test-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.25);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.2s;
+    }
+    .test-modal.active {
+      display: flex;
+    }
+    .test-modal-content {
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 8px 40px rgba(102, 126, 234, 0.18);
+      padding: 40px 32px 32px 32px;
+      min-width: 340px;
+      max-width: 95vw;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: zoomIn 0.2s;
+    }
+    .test-modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: #667eea;
+      letter-spacing: 1px;
+    }
+    .test-bar-modal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+    }
+    .test-bar-modal .btn {
+      min-width: 160px;
+      flex: 1 1 160px;
+      max-width: 220px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+      transition: box-shadow 0.2s, transform 0.2s;
+      margin: 0;
+    }
+    .test-bar-modal .btn:active {
+      box-shadow: 0 1px 4px rgba(102, 126, 234, 0.10);
+    }
+    @media (max-width: 700px) {
+      .test-bar-modal {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .test-bar-modal .btn {
+        min-width: 120px;
+        font-size: 0.95rem;
+        padding: 10px 8px;
+      }
+    }
+    .close-modal-btn {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2.2rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.2s;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .close-modal-btn:hover {
+      color: #e17055;
+      background: #f8f9fd;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      .test-modal-content {
+        padding: 18px 6px 12px 6px;
+        min-width: 0;
+      }
+      .test-bar-modal {
+        gap: 10px;
+      }
+    }
+    .main-test-btns-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 32px;
+    }
+    .empty-btn {
+      background: #fff;
+      border: 2px dashed #232a5c22;
+      box-shadow: 0 8px 32px rgba(35, 42, 92, 0.10);
+      color: #232a5c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .empty-btn .main-test-logo {
+      margin-bottom: 12px;
+    }
+    .ai-title {
+      color: #232a5c;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: none;
+    }
+    .empty-btn:active, .empty-btn:focus {
+      outline: 2px solid #fff6;
+    }
+    @media (max-width: 700px) {
+      .main-test-btns-row {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+    .svg-btn {
+      background: #fff;
+      border: 2px solid #232a5c22;
+      box-shadow: 0 8px 32px rgba(35, 42, 92, 0.10);
+      color: #232a5c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .svg-btn .main-test-logo {
+      margin-bottom: 12px;
+    }
+    .svg-title {
+      color: #232a5c;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: none;
+    }
+    .bossai-btn {
+      background: #fff;
+      border: 2px solid #232a5c22;
+      box-shadow: 0 8px 32px rgba(35, 42, 92, 0.10);
+      color: #232a5c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .bossai-logo-wrapper {
+      background: #fff;
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+      margin-bottom: 12px;
+    }
+    .bossai-title {
+      color: #232a5c;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: none;
+    }
+    .main-test-btns-vertical {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .main-test-btns-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+    .upper-row {
+      margin-bottom: 0;
+    }
+    .lower-row {
+      margin-top: 0;
+    }
+    @media (max-width: 900px) {
+      .main-test-btns-row {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .main-test-btns-vertical {
+        gap: 24px;
+      }
+    }
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      min-height: 80vh;
+    }
+    .sidebar {
+      width: 270px;
+      background: #232a5c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px 18px 32px 18px;
+      box-shadow: 2px 0 16px rgba(35,42,92,0.08);
+      border-radius: 24px 0 0 24px;
+      margin-right: 32px;
+      min-height: 600px;
+      min-width: 220px;
+      position: relative;
+      transition: width 0.3s cubic-bezier(.4,2,.6,1), min-width 0.3s cubic-bezier(.4,2,.6,1), padding 0.3s;
+      z-index: 10;
+    }
+    .sidebar.closed {
+      width: 48px;
+      min-width: 48px;
+      padding: 32px 6px 32px 6px;
+      overflow: hidden;
+      box-shadow: 2px 0 16px rgba(35,42,92,0.04);
+    }
+    .sidebar-title-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #232a5c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s, box-shadow 0.2s;
+      outline: none;
+      position: relative;
+      z-index: 11;
+    }
+    .sidebar-title-btn:hover, .sidebar-title-btn:focus {
+      background: linear-gradient(90deg, #232a5c 0%, #667eea 100%);
+      box-shadow: 0 4px 16px rgba(102,126,234,0.18);
+    }
+    .sidebar-flyout-modal {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(35,42,92,0.18);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s;
+    }
+    .sidebar-flyout-modal.active {
+      display: flex;
+    }
+    .sidebar-flyout-content {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(102,126,234,0.18);
+      padding: 40px 32px 32px 32px;
+      min-width: 340px;
+      max-width: 90vw;
+      min-height: 220px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: zoomIn 0.2s;
+      overflow-y: auto;
+    }
+    .sidebar-flyout-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      color: #232a5c;
+      letter-spacing: 1px;
+    }
+    .sidebar-flyout-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .sidebar-flyout-thumb {
+      width: 180px;
+      height: 120px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      cursor: pointer;
+      border: 2px solid #232a5c11;
+      transition: transform 0.15s, box-shadow 0.15s, border 0.15s;
+      background: #fff;
+    }
+    .sidebar-flyout-thumb:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(102,126,234,0.18);
+      border: 2px solid #667eea;
+    }
+    .sidebar-flyout-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2.2rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.2s;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .sidebar-flyout-close:hover {
+      color: #e17055;
+      background: #f8f9fd;
+    }
+    .sidebar-toggle-btn {
+      position: fixed;
+      left: 16px;
+      top: calc(32px + 370px);
+      transform: none;
+      width: 30px;
+      height: 30px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(35,42,92,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s, box-shadow 0.2s, left 0.3s, top 0.3s;
+      padding: 0;
+      outline: none;
+    }
+    .sidebar.closed .sidebar-toggle-btn {
+      left: 16px;
+      top: calc(32px + 370px);
+      transform: none;
+    }
+    .sidebar.closed .sidebar-title,
+    .sidebar.closed .sidebar-screenshots-list span {
+      display: none;
+    }
+    .sidebar.closed .sidebar-screenshot-thumb {
+      max-width: 32px !important;
+      max-height: 32px !important;
+      min-width: 32px !important;
+      min-height: 32px !important;
+      border-radius: 8px;
+    }
+    @media (max-width: 900px) {
+      .main-layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        min-width: 0;
+        border-radius: 24px 24px 0 0;
+        margin-right: 0;
+        margin-bottom: 24px;
+        min-height: 0;
+        position: relative;
+      }
+      .sidebar.closed {
+        width: 48px;
+        min-width: 48px;
+        padding: 18px 6px 18px 6px;
+      }
+      .sidebar-toggle-btn {
+        top: 10px;
+        right: -10px;
+      }
+    }
+    .test-history-section {
+      margin: 48px 0 0 0;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(35,42,92,0.08);
+      padding: 32px 24px;
+    }
+    .test-history-section h3 {
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #232a5c;
+    }
+    .test-history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      background: #fff;
+    }
+    .test-history-table th, .test-history-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e3e7fa;
+      text-align: left;
+    }
+    .test-history-table th {
+      background: #f8f9fd;
+      font-weight: 600;
+      color: #232a5c;
+    }
+    .test-history-table tr:last-child td {
+      border-bottom: none;
+    }
+    .test-history-table td {
+      color: #232a5c;
+    }
+    .test-history-table .success {
+      color: #00b894;
+      font-weight: 700;
+    }
+    .test-history-table .error {
+      color: #ff6b6b;
+      font-weight: 700;
+    }
+    .test-history-table .detail-btn {
+      background: #667eea;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .test-history-table .detail-btn:hover {
+      background: #232a5c;
+    }
+    .dashboard-header-bar {
+      background: linear-gradient(90deg, #e3e7fa 0%, #f8f9fd 100%);
+      box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
+      border-radius: 24px;
+      padding: 18px 22px 14px 22px;
+      margin: 18px 0 18px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 420px;
+      min-width: 220px;
+      transition: box-shadow 0.2s;
+    }
+    .dashboard-header-bar h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #232a5c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(35,42,92,0.06);
+    }
+    .dashboard-header-bar .dashboard-subtitle {
+      font-size: 0.98rem;
+      color: #667eea;
+      font-weight: 500;
+      margin: 0;
+      letter-spacing: 0.5px;
+      opacity: 0.95;
+    }
+    @media (max-width: 700px) {
+      .dashboard-header-bar {
+        padding: 10px 6px 8px 6px;
+        max-width: 100%;
+        border-radius: 12px;
+      }
+      .dashboard-header-bar h2 {
+        font-size: 1rem;
+      }
+      .dashboard-header-bar .dashboard-subtitle {
+        font-size: 0.89rem;
+      }
+    }
+    .test-list-modern {
+      list-style: none;
+      margin: 24px 0 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .test-list-modern li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8f9fd;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(102, 126, 234, 0.08);
+      padding: 18px 22px;
+      transition: box-shadow 0.18s, background 0.18s;
+      gap: 18px;
+    }
+    .test-list-modern li:hover {
+      background: #e3e7fa;
+      box-shadow: 0 4px 24px rgba(102, 126, 234, 0.13);
+    }
+    .test-list-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .test-list-info .icon {
+      font-size: 1.7rem;
+      color: #667eea;
+      min-width: 32px;
+      text-align: center;
+    }
+    .test-list-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #232a5c;
+      margin-bottom: 2px;
+    }
+    .test-list-desc {
+      font-size: 0.97rem;
+      color: #667eea;
+      opacity: 0.92;
+    }
+    .test-list-btn {
+      background: #667eea;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 22px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+      transition: background 0.18s, box-shadow 0.18s, transform 0.13s;
+      outline: none;
+    }
+    .test-list-btn:hover {
+      background: #232a5c;
+      color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 4px 18px rgba(102, 126, 234, 0.18);
+    }
+    @media (max-width: 700px) {
+      .test-list-modern li {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 8px;
+        gap: 10px;
+      }
+      .test-list-btn {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 0.98rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="app-container">
-    <header class="app-header">
-      <div class="header-content">
-        <div class="brand">
-          <div class="logo">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h1>Covera</h1>
-        </div>
-        <div class="header-actions">
-          <button class="header-btn">
-            <i class="fas fa-cog"></i>
-          </button>
-          <button class="header-btn">
-            <i class="fas fa-bell"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-    
+  <div class="main-layout">
+    <!-- Sidebar kaldırıldı -->
     <div class="container">
-      <div class="dashboard-header">
+      <div class="dashboard-header-bar">
         <h2>Test Otomasyon Kontrol Paneli</h2>
         <p class="dashboard-subtitle">Test süreçlerinizi yönetin ve izleyin</p>
       </div>
-      
-      <div class="test-table">
-        <div class="table-header">
-          <div class="table-cell table-cell-icon"></div>
-          <div class="table-cell">Test Türü</div>
-          <div class="table-cell">Açıklama</div>
-          <div class="table-cell table-cell-action">İşlem</div>
+      <!-- Testler Ana Butonu Başlangıç -->
+      <div class="main-test-btns-vertical">
+        <div class="main-test-btns-row upper-row">
+          <button id="openTestModalBtn" class="main-test-btn">
+            <img src="cvusLogo.png" alt="CV US Logo" class="main-test-logo" />
+            <span class="main-test-title">CV US</span>
+          </button>
+          <button class="main-test-btn svg-btn">
+            <img src="Logo.svg" alt="Logo SVG" class="main-test-logo" />
+            <span class="main-test-title svg-title">Lobster Lead</span>
+          </button>
         </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon login-icon">
-              <i class="fas fa-sign-in-alt"></i>
+        <div class="main-test-btns-row lower-row">
+          <button class="main-test-btn empty-btn">
+            <img src="logo-removebg.png" alt="Destek Logo" class="main-test-logo" />
+            <span class="main-test-title ai-title">Calling Ai</span>
+          </button>
+          <button class="main-test-btn bossai-btn">
+            <div class="bossai-logo-wrapper">
+              <img src="logo-l.svg" alt="Boss AI Logo" class="main-test-logo" />
             </div>
-          </div>
-          <div class="table-cell"><strong>Login Testi</strong></div>
-          <div class="table-cell">CVUS Portal kullanıcı giriş işlemini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="loginTestBtn" class="btn btn-login">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
-        </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon cv-icon">
-              <i class="fas fa-file-upload"></i>
-            </div>
-          </div>
-          <div class="table-cell"><strong>CV Yükleme Testi</strong></div>
-          <div class="table-cell">Portal üzerinden CV.pdf dosyası yükleme işlemini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="cvTestBtn" class="btn btn-cv">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
-        </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon position-icon">
-              <i class="fas fa-briefcase"></i>
-            </div>
-          </div>
-          <div class="table-cell"><strong>Pozisyon Testi</strong></div>
-          <div class="table-cell">İş pozisyonları oluşturma ve düzenleme işlemlerini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="positionTestBtn" class="btn btn-position">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
-        </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon users-icon">
-              <i class="fas fa-users"></i>
-            </div>
-          </div>
-          <div class="table-cell"><strong>Kullanıcı Testi</strong></div>
-          <div class="table-cell">Kullanıcı arama, ekleme ve yönetim işlemlerini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="usersTestBtn" class="btn btn-users">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
-        </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon roles-icon">
-              <i class="fas fa-user-tag"></i>
-            </div>
-          </div>
-          <div class="table-cell"><strong>Rol Testi</strong></div>
-          <div class="table-cell">Kullanıcı rolleri oluşturma ve yetkilendirme işlemlerini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="rolesTestBtn" class="btn btn-roles">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
-        </div>
-        
-        <div class="table-row">
-          <div class="table-cell table-cell-icon">
-            <div class="test-icon reporting-icon">
-              <i class="fas fa-chart-bar"></i>
-            </div>
-          </div>
-          <div class="table-cell"><strong>Raporlama Testi</strong></div>
-          <div class="table-cell">Genel raporlama modülü ve grafik görüntüleme işlemlerini test eder</div>
-          <div class="table-cell table-cell-action">
-            <button id="reportingTestBtn" class="btn btn-reporting">
-              <i class="fas fa-play icon"></i>
-              Çalıştır
-            </button>
-          </div>
+            <span class="main-test-title bossai-title">Boss AI</span>
+          </button>
         </div>
       </div>
-    
-    <div id="loading" class="loading">
-      <div class="spinner"></div>
-      <span>Test çalıştırılıyor...</span>
-    </div>
-    
-    <div id="resultContainer" class="result-container">
-      <div class="result-section">
-        <div class="result-section-header">
-          <h3>Test Sonuçları</h3>
-          <div id="resultBadge" class="result-badge">Bekliyor</div>
-        </div>
-        
-        <div id="resultHeader" class="result-header">
-          <i id="resultIcon"></i>
-          <span id="resultTitle"></span>
-        </div>
-        
-        <div class="result-body">
-          <div id="resultContent" class="result-content"></div>
-          
-          <div class="stats">
-            <div class="stat-item">
-              <div id="duration" class="stat-value">-</div>
-              <div class="stat-label">Süre</div>
-            </div>
-            <div class="stat-item">
-              <div id="status" class="stat-value">-</div>
-              <div class="stat-label">Durum</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="result-section">
-        <div class="result-section-header">
-          <h3>Ekran Görüntüleri</h3>
-        </div>
-        
-        <div class="screenshots-container">
-          <!-- Login Test Screenshot Section -->
-          <div id="loginScreenshotSection" style="display: none;">
-            <div class="screenshot-header">
-              <i class="fas fa-sign-in-alt"></i>
-              <span>Login Test</span>
-            </div>
-            <div class="screenshot-preview">
-              <button class="screenshot-button" onclick="openImageModal('login')" aria-label="Login test ekran görüntüsünü büyütmek için tıklayın">
-                <img id="loginScreenshotImg" src="" alt="Login Test Ekran Görüntüsü">
-                <div class="screenshot-overlay">
-                  <i class="fas fa-search-plus"></i>
-                  <span>Büyütmek için tıklayın</span>
+      <!-- Testler Ana Butonu Bitiş -->
+      <!-- Testler Modal Başlangıç -->
+      <div id="testModal" class="test-modal">
+        <div class="test-modal-content">
+          <button class="close-modal-btn" id="closeTestModalBtn" aria-label="Kapat">&times;</button>
+          <h3 class="test-modal-title">CV US Testleri</h3>
+          <ul class="test-list-modern">
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-sign-in-alt icon"></i>
+                <div>
+                  <div class="test-list-title">Login Testi</div>
+                  <div class="test-list-desc">Kullanıcı girişi otomasyonunu test eder.</div>
                 </div>
-              </button>
+              </div>
+              <button id="loginTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-file-upload icon"></i>
+                <div>
+                  <div class="test-list-title">CV Yükleme Testi</div>
+                  <div class="test-list-desc">CV yükleme fonksiyonunu test eder.</div>
+                </div>
+              </div>
+              <button id="cvTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-briefcase icon"></i>
+                <div>
+                  <div class="test-list-title">Pozisyon Testi</div>
+                  <div class="test-list-desc">Pozisyon ekleme ve görüntülemeyi test eder.</div>
+                </div>
+              </div>
+              <button id="positionTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-users icon"></i>
+                <div>
+                  <div class="test-list-title">Kullanıcı Testi</div>
+                  <div class="test-list-desc">Kullanıcı yönetimi fonksiyonlarını test eder.</div>
+                </div>
+              </div>
+              <button id="usersTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-user-tag icon"></i>
+                <div>
+                  <div class="test-list-title">Rol Testi</div>
+                  <div class="test-list-desc">Rol atama ve kontrolünü test eder.</div>
+                </div>
+              </div>
+              <button id="rolesTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+            <li>
+              <div class="test-list-info">
+                <i class="fas fa-chart-bar icon"></i>
+                <div>
+                  <div class="test-list-title">Raporlama Testi</div>
+                  <div class="test-list-desc">Test raporlamasını ve geçmişini test eder.</div>
+                </div>
+              </div>
+              <button id="reportingTestBtn" class="test-list-btn">Çalıştır</button>
+            </li>
+                <li>
+      <div class="test-list-info">
+        <i class="fas fa-lightbulb icon"></i>
+        <div>
+          <div class="test-list-title">Pozisyon Öneri Testi</div>
+          <div class="test-list-desc">Pozisyon öneri fonksiyonunu test eder.</div>
+        </div>
+      </div>
+      <button id="position-recommendedTestBtn" class="test-list-btn">Çalıştır</button>
+    </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Testler Modal Bitiş -->
+       
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <span>Test çalıştırılıyor...</span>
+      </div>
+      <div id="resultContainer" class="result-container">
+        <div class="result-section">
+          <div class="result-section-header">
+            <h3>Test Sonuçları</h3>
+            <div id="resultBadge" class="result-badge">Bekliyor</div>
+          </div>
+          <div id="resultHeader" class="result-header">
+            <i id="resultIcon"></i>
+            <span id="resultTitle"></span>
+          </div>
+          <div class="result-body">
+            <div id="resultContent" class="result-content"></div>
+            <div class="stats">
+              <div class="stat-item">
+                <div id="duration" class="stat-value">-</div>
+                <div class="stat-label">Süre</div>
+              </div>
+              <div class="stat-item">
+                <div id="status" class="stat-value">-</div>
+                <div class="stat-label">Durum</div>
+              </div>
             </div>
           </div>
-
-          <!-- CV Test Screenshot Section -->
-          <div id="cvScreenshotSection" style="display: none;">
-            <div class="screenshot-header">
-              <i class="fas fa-file-upload"></i>
-              <span>CV Yükleme Test</span>
+        </div>
+        <div class="result-section">
+          <div class="result-section-header">
+            <h3>Ekran Görüntüleri</h3>
+          </div>
+          <div class="screenshots-container">
+            <!-- Login Test Screenshot Section -->
+            <div id="loginScreenshotSection" style="display: none;">
+              <div class="screenshot-header">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login Test</span>
+              </div>
+              <div class="screenshot-preview">
+                <button class="screenshot-button" onclick="openImageModal('login')" aria-label="Login test ekran görüntüsünü büyütmek için tıklayın">
+                  <img id="loginScreenshotImg" src="" alt="Login Test Ekran Görüntüsü">
+                  <div class="screenshot-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Büyütmek için tıklayın</span>
+                  </div>
+                </button>
+              </div>
             </div>
-            <div class="screenshot-preview">
-              <button class="screenshot-button" onclick="openImageModal('cv')" aria-label="CV test ekran görüntüsünü büyütmek için tıklayın">
-                <img id="cvScreenshotImg" src="" alt="CV Test Ekran Görüntüsü">
-                <div class="screenshot-overlay">
-                  <i class="fas fa-search-plus"></i>
-                  <span>Büyütmek için tıklayın</span>
-                </div>
-              </button>
+            <!-- CV Test Screenshot Section -->
+            <div id="cvScreenshotSection" style="display: none;">
+              <div class="screenshot-header">
+                <i class="fas fa-file-upload"></i>
+                <span>CV Yükleme Test</span>
+              </div>
+              <div class="screenshot-preview">
+                <button class="screenshot-button" onclick="openImageModal('cv')" aria-label="CV test ekran görüntüsünü büyütmek için tıklayın">
+                  <img id="cvScreenshotImg" src="" alt="CV Test Ekran Görüntüsü">
+                  <div class="screenshot-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Büyütmek için tıklayın</span>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <!-- Test Geçmişi ve Raporlama -->
+      <div class="test-history-section">
+        <h3>Test Geçmişi</h3>
+        <table class="test-history-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Test Adı</th>
+              <th>Sonuç</th>
+              <th>Süre</th>
+              <th>Zaman</th>
+              <th>Detay</th>
+            </tr>
+          </thead>
+          <tbody id="testHistoryBody">
+            <!-- JS ile doldurulacak -->
+          </tbody>
+        </table>
+      </div>
+      <!-- Detaylı Rapor Modalı -->
+      <div id="historyDetailModal" class="modal">
+        <div class="modal-content history-modal-content">
+          <button type="button" class="close" id="closeHistoryDetailBtn" aria-label="Kapat">&times;</button>
+          <h3 id="historyDetailTitle">Test Detayı</h3>
+          <div id="historyDetailContent"></div>
+        </div>
+        <script>
+  const closeBtn = document.getElementById("closeHistoryDetailBtn");
+  const modal = document.getElementById("historyDetailModal");
 
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal" onclick="closeImageModal()">
-      <div class="modal-content">
-        <button class="close" onclick="closeImageModal()" aria-label="Modal'ı kapat">&times;</button>
-        <img id="modalImg" src="" alt="Test Ekran Görüntüsü">
-        <div class="modal-caption">
-          <div class="modal-title">
-            <i id="modalIcon" class="fas fa-camera"></i>
-            <span id="modalTitle">Test Ekran Görüntüsü</span>
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+</script>
+      </div>
+      <!-- Image Modal -->
+      <div id="imageModal" class="modal" onclick="closeImageModal()">
+        <div class="modal-content">
+          <button class="close" onclick="closeImageModal()" aria-label="Modal'ı kapat">&times;</button>
+          <img id="modalImg" src="login_screenshot.png" alt="Test Ekran Görüntüsü">
+          <div class="modal-caption">
+            <div class="modal-title">
+              <i id="modalIcon" class="fas fa-camera"></i>
+              <span id="modalTitle">Test Ekran Görüntüsü</span>
+            </div>
+            <div id="modalSubtitle" class="modal-subtitle">Test Sonucu</div>
           </div>
-          <div id="modalSubtitle" class="modal-subtitle">Test Sonucu</div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Sidebar Flyout Modal -->
+  <div class="sidebar-flyout-modal" id="sidebarFlyoutModal">
+    <div class="sidebar-flyout-content">
+      <button class="sidebar-flyout-close" id="sidebarFlyoutCloseBtn" aria-label="Kapat">&times;</button>
+      <div class="sidebar-flyout-title"><i class="fas fa-images"></i> Ekran Görüntüleri</div>
+      <div class="sidebar-flyout-list" id="sidebarFlyoutList">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </div>
+  </div>
+
+
 
   <script src="renderer.js"></script>
 </body>

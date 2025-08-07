@@ -37,6 +37,34 @@ document.getElementById('reportingTestBtn').addEventListener('click', async () =
   await runTest('reporting');
 });
 
+// Test geçmişi array'i
+const testHistory = [];
+
+// Test geçmişi tabloya yazdırma fonksiyonu (orijinal)
+function renderTestHistory() {
+  const tbody = document.getElementById('testHistoryBody');
+  tbody.innerHTML = '';
+  testHistory.slice().reverse().forEach((item, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${testHistory.length - idx}</td>
+      <td>${item.name}</td>
+      <td class="${item.success ? 'success' : 'error'}">${item.success ? 'Başarılı' : 'Başarısız'}</td>
+      <td>${item.duration}s</td>
+      <td>${item.time}</td>
+      <td><button class="detail-btn" data-idx="${testHistory.length - idx - 1}">Detay</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  // Detay butonlarına event ekle
+  document.querySelectorAll('.detail-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = parseInt(btn.getAttribute('data-idx'));
+      showHistoryDetail(idx);
+    });
+  });
+}
+
 async function runTest(testType) {
   currentTestType = testType;
   const runBtn = document.getElementById(testType + 'TestBtn');
@@ -56,13 +84,40 @@ async function runTest(testType) {
   runBtn.disabled = true;
   
   // Buton metnini güncelle
-  if (testType === 'login') {
-    runBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i>Login Test Çalışıyor...';
-    console.log('Login testi başlatılıyor...');
-  } else {
-    runBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i>CV Test Çalışıyor...';
-    console.log('CV testi başlatılıyor...');
+  let buttonText = '';
+  let buttonIcon = '';
+  switch (testType) {
+    case 'login':
+      buttonText = 'Login Testi';
+      buttonIcon = '<i class="fas fa-sign-in-alt icon"></i>';
+      break;
+    case 'cv':
+      buttonText = 'CV Yükleme Testi';
+      buttonIcon = '<i class="fas fa-file-upload icon"></i>';
+      break;
+    case 'position':
+      buttonText = 'Pozisyon Testi';
+      buttonIcon = '<i class="fas fa-briefcase icon"></i>';
+      break;
+    case 'users':
+      buttonText = 'Kullanıcı Testi';
+      buttonIcon = '<i class="fas fa-users icon"></i>';
+      break;
+    case 'roles':
+      buttonText = 'Rol Testi';
+      buttonIcon = '<i class="fas fa-user-tag icon"></i>';
+      break;
+    case 'reporting':
+      buttonText = 'Raporlama Testi';
+      buttonIcon = '<i class="fas fa-chart-bar icon"></i>';
+      break;
+    default:
+      buttonText = 'Test';
+      buttonIcon = '<i class="fas fa-play icon"></i>';
   }
+
+  runBtn.innerHTML = `<i class="fas fa-spinner fa-spin icon"></i>${buttonText} Çalışıyor...`;
+  console.log(`${testType} testi başlatılıyor...`);
   
   loading.classList.add('active');
   resultContainer.classList.remove('active');
@@ -96,8 +151,16 @@ async function runTest(testType) {
       statusElement.textContent = 'Başarılı';
       statusElement.style.color = '#00b894';
       
-      // Screenshot'ı göster
-      showScreenshot(testType);
+      // Test geçmişine ekle
+      testHistory.push({
+        name: testType.charAt(0).toUpperCase() + testType.slice(1),
+        success: true,
+        duration,
+        time: new Date().toLocaleString('tr-TR'),
+        message: result.message,
+        screenshot: null // screenshots array kaldırıldı
+      });
+      renderTestHistory();
     } else {
       // Hatalı sonuç
       resultContainer.classList.add('result-error');
@@ -107,6 +170,16 @@ async function runTest(testType) {
       resultBadge.className = 'result-badge error';
       statusElement.textContent = 'Başarısız';
       statusElement.style.color = '#ff6b6b';
+      // Test geçmişine ekle
+      testHistory.push({
+        name: testType.charAt(0).toUpperCase() + testType.slice(1),
+        success: false,
+        duration,
+        time: new Date().toLocaleString('tr-TR'),
+        message: result.message,
+        screenshot: null // screenshots array kaldırıldı
+      });
+      renderTestHistory();
     }
     
     // Sonuç içeriği ve istatistikleri
@@ -115,11 +188,7 @@ async function runTest(testType) {
     
     // Buton durumunu sıfırla
     runBtn.disabled = false;
-    if (testType === 'login') {
-      runBtn.innerHTML = '<i class="fas fa-sign-in-alt icon"></i>Login Testi';
-    } else {
-      runBtn.innerHTML = '<i class="fas fa-file-upload icon"></i>CV Yükleme Testi';
-    }
+    runBtn.innerHTML = `${buttonIcon}${buttonText}`;
     
   } catch (error) {
     // Hata durumu
@@ -142,102 +211,70 @@ async function runTest(testType) {
     
     // Buton durumunu sıfırla
     runBtn.disabled = false;
-    if (testType === 'login') {
-      runBtn.innerHTML = '<i class="fas fa-sign-in-alt icon"></i>Login Testi';
-    } else {
-      runBtn.innerHTML = '<i class="fas fa-file-upload icon"></i>CV Yükleme Testi';
+    runBtn.innerHTML = `${buttonIcon}${buttonText}`;
+    // Test geçmişine ekle (catch)
+    testHistory.push({
+      name: testType.charAt(0).toUpperCase() + testType.slice(1),
+      success: false,
+      duration: ((Date.now() - testStartTime) / 1000).toFixed(1),
+      time: new Date().toLocaleString('tr-TR'),
+      message: error.message || 'Bilinmeyen hata',
+      screenshot: null // screenshots array kaldırıldı
+    });
+    renderTestHistory();
+  }
+}
+
+// Detay modalı göster
+function showHistoryDetail(idx) {
+  const modal = document.getElementById('historyDetailModal');
+  const title = document.getElementById('historyDetailTitle');
+  const content = document.getElementById('historyDetailContent');
+  const item = testHistory[idx];
+  if (!item) return;
+  title.textContent = `${item.name} (${item.success ? 'Başarılı' : 'Başarısız'})`;
+  content.innerHTML = `
+    <b>Test Adı:</b> ${item.name}<br>
+    <b>Sonuç:</b> ${item.success ? 'Başarılı' : 'Başarısız'}<br>
+    <b>Süre:</b> ${item.duration}s<br>
+    <b>Zaman:</b> ${item.time}<br>
+    <b>Mesaj:</b> <pre>${item.message}</pre>
+    ${item.screenshot ? `<img src='${item.screenshot}' alt='Ekran Görüntüsü' style='max-width:320px;margin-top:12px;border-radius:12px;' />` : ''}
+  `;
+  modal.classList.add('active');
+  modal.style.display = 'block';
+}
+// Modal kapama
+const closeHistoryDetailBtn = document.getElementById('closeHistoryDetailBtn');
+const historyDetailModal = document.getElementById('historyDetailModal');
+if (closeHistoryDetailBtn && historyDetailModal) {
+  function closeHistoryModal() {
+    historyDetailModal.classList.remove('active');
+    historyDetailModal.style.display = 'none';
+  }
+  closeHistoryDetailBtn.addEventListener('click', closeHistoryModal);
+  closeHistoryDetailBtn.addEventListener('mousedown', closeHistoryModal);
+  historyDetailModal.addEventListener('mousedown', (e) => {
+    // Sadece modal arka planına tıklanınca kapansın, içeriğe tıklanınca kapanmasın
+    if (e.target === historyDetailModal) {
+      closeHistoryModal();
     }
+  });
+  // Modal içeriğine tıklanınca kapanmasın
+  const modalContent = document.querySelector('.history-modal-content');
+  if (modalContent) {
+    modalContent.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+    });
   }
+  // Escape tuşu ile kapama
+  document.addEventListener('keydown', (e) => {
+    if (historyDetailModal.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) {
+      closeHistoryModal();
+    }
+  });
 }
 
-// Screenshot gösterme fonksiyonu
-function showScreenshot(testType) {
-  let screenshotSection, screenshotImg, imagePath;
-  
-  console.log(`${testType} testi için ekran görüntüsü gösteriliyor`);
-  
-  if (testType === 'login') {
-    screenshotSection = document.getElementById('loginScreenshotSection');
-    screenshotImg = document.getElementById('loginScreenshotImg');
-    imagePath = 'logincv.png'; // Login testi ekran görüntüsü
-  } else if (testType === 'cv') {
-    screenshotSection = document.getElementById('cvScreenshotSection');
-    screenshotImg = document.getElementById('cvScreenshotImg');
-    imagePath = 'cv_upload_success.png'; // CV testi ekran görüntüsü
-  }
-  
-  if (!screenshotSection || !screenshotImg) {
-    console.error('Screenshot elemanları bulunamadı');
-    return;
-  }
-  
-  // Timestamp ekleyerek cache'i bypass et
-  const timestamp = new Date().getTime();
-  screenshotImg.src = `${imagePath}?t=${timestamp}`;
-  
-  screenshotImg.onload = () => {
-    screenshotSection.style.display = 'block';
-    screenshotSection.style.animation = 'fadeIn 0.5s ease-out';
-    console.log(`${testType} ekran görüntüsü yüklendi`);
-  };
-  
-  screenshotImg.onerror = (e) => {
-    console.error(`${testType} screenshot yüklenemedi: ${e}`);
-  };
-}
-
-// Modal açma fonksiyonu
-function openImageModal(testType) {
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('modalImg');
-  const modalIcon = document.getElementById('modalIcon');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalSubtitle = document.getElementById('modalSubtitle');
-  
-  let screenshotImg;
-  
-  if (testType === 'login') {
-    screenshotImg = document.getElementById('loginScreenshotImg');
-    modalIcon.className = 'fas fa-sign-in-alt';
-    modalTitle.textContent = 'Login Test Ekran Görüntüsü';
-    modalSubtitle.textContent = 'CVUS Portal Login Test';
-  } else if (testType === 'cv') {
-    screenshotImg = document.getElementById('cvScreenshotImg');
-    modalIcon.className = 'fas fa-file-upload';
-    modalTitle.textContent = 'CV Test Ekran Görüntüsü';
-    modalSubtitle.textContent = 'CV Upload Test';
-  }
-  
-  if (screenshotImg && screenshotImg.src) {
-    modalImg.src = screenshotImg.src;
-    modal.classList.add('active');
-    modal.style.display = 'block';
-    
-    // Escape tuşu ile kapatma
-    document.addEventListener('keydown', handleModalKeydown);
-  }
-}
-
-// Modal kapatma fonksiyonu
-function closeImageModal() {
-  const modal = document.getElementById('imageModal');
-  modal.classList.remove('active');
-  
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 300);
-  
-  document.removeEventListener('keydown', handleModalKeydown);
-}
-
-// Modal klavye event handler
-function handleModalKeydown(event) {
-  if (event.key === 'Escape') {
-    closeImageModal();
-  }
-}
-
-// Sayfa yüklendiğinde butonların varsayılan durumunu ayarla
 document.addEventListener('DOMContentLoaded', () => {
   const loginBtn = document.getElementById('loginTestBtn');
   const cvBtn = document.getElementById('cvTestBtn');
@@ -255,4 +292,55 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Sidebar toggle
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+  const sidebarToggleIcon = document.getElementById('sidebarToggleIcon');
+  if (sidebar && sidebarToggleBtn && sidebarToggleIcon) {
+    sidebarToggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('closed');
+      if (sidebar.classList.contains('closed')) {
+        sidebarToggleIcon.classList.remove('fa-chevron-left');
+        sidebarToggleIcon.classList.add('fa-chevron-right');
+      } else {
+        sidebarToggleIcon.classList.remove('fa-chevron-right');
+        sidebarToggleIcon.classList.add('fa-chevron-left');
+      }
+    });
+  }
+  const closeHistoryDetailBtn = document.getElementById('closeHistoryDetailBtn');
+  const historyDetailModal = document.getElementById('historyDetailModal');
+  if (closeHistoryDetailBtn && historyDetailModal) {
+    closeHistoryDetailBtn.onclick = function() {
+      historyDetailModal.classList.remove('active');
+      historyDetailModal.style.display = 'none';
+    };
+  }
+
+  // PDF ile ilgili kodlar kaldırıldı
+
+  const openTestModalBtn = document.getElementById('openTestModalBtn');
+  const testModal = document.getElementById('testModal');
+  const closeTestModalBtn = document.getElementById('closeTestModalBtn');
+  if (openTestModalBtn && testModal) {
+    openTestModalBtn.addEventListener('click', () => {
+      testModal.classList.add('active');
+      testModal.style.display = 'flex';
+    });
+  }
+  if (closeTestModalBtn && testModal) {
+    closeTestModalBtn.addEventListener('click', () => {
+      testModal.classList.remove('active');
+      testModal.style.display = 'none';
+    });
+    
+  }
+      document.getElementById('position-recommendedTestBtn').addEventListener('click', async () => {
+      console.log('Önerilen Pozisyon test butonu tıklandı, position-recommended.js çalıştırılacak');
+      await runTest('position-recommended');
+    });
+    
+    
+
 });

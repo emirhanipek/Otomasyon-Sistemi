@@ -4,7 +4,6 @@
   "description": "Covera Test Automation Application",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
@@ -12,12 +11,21 @@
     "build:win": "electron-builder --win",
     "build:linux": "electron-builder --linux"
   },
-  "keywords": ["covera", "testing", "automation"],
+  "keywords": [
+    "covera",
+    "testing",
+    "automation"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {},
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  },
   "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.0.14",
+    "allure-playwright": "^3.3.2",
     "electron": "^37.1.0",
     "electron-builder": "^26.0.12",
     "playwright": "^1.53.1"
@@ -36,15 +44,24 @@
     },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "icon": "temp.svg"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "temp.svg"
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Development",
       "icon": "temp.svg"
     }

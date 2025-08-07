@@ -20,7 +20,7 @@ const { login } = require('./login');
    'BACKEND ENGINEER E2E',
    'QA TESTER AUTOMATION',
    'FULL STACK DEVELOPER TEST'
-    ];
+    ];  
 
     // Rastgele başlık seç
     const randomTitle = jobTitles[Math.floor(Math.random() * jobTitles.length)];
@@ -126,33 +126,24 @@ const { login } = require('./login');
 
     await page.click('xpath=/html/body/div[5]/div[1]/div/input');
     await page.waitForTimeout(1000);
-    await page.fill('xpath=/html/body/div[5]/div[1]/div/input', 'Beykent University');
+    await page.fill('xpath=/html/body/div[5]/div[1]/div/input', 'Beykent Üniversitesi');
     await page.waitForTimeout(3000);
 
     // Açılan önerilerden Beykent University yazan elemana tıkla
-    await page.click('text="Beykent University"');
+    await page.click('text="Beykent Üniversitesi"');
     await page.waitForTimeout(3000);
 
     await page.mouse.click(1000, 10);  
-    await page.waitForTimeout(2000);
 
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/div/span');
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/div/span');
-    await page.waitForTimeout(3000);
+   await page.locator('div').filter({ hasText: /^You can write the reason for opening this position here...$/ }).click();
+   await page.waitForTimeout(3000)
 
-    await page.click('xpath=/html/body/div[5]/div[1]/div/input');
-    await page.waitForTimeout(1000);
-    await page.fill('xpath=/html/body/div[5]/div[1]/div/input', 'Computer Engineering');
-    await page.waitForTimeout(3000);
-
-    await page.click('text="Computer Engineering"');
-    await page.waitForTimeout(3000);
-
-    await page.mouse.click(1000, 10);  
-    await page.waitForTimeout(2000);
+   await page.waitForSelector('xpath=/html/body/div[5]/div[4]/span');
+   await page.click('xpath=//html/body/div[5]/div[4]/span');
+   await page.waitForTimeout(3000);
 
 
-    const box = await page.$('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/div[1]/div[2]/div/div/div[3]/div[1]');
+    const box = await page.$('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[3]/div[1]');
 
     if (box) {
     const boxBounding = await box.boundingBox();
@@ -235,14 +226,16 @@ const { login } = require('./login');
 
    await page.waitForSelector('text="Save"', { timeout: 10000 });
    await page.click('text="Save"');
-   await page.waitForTimeout(2000)
+   await page.waitForTimeout(4000)
     
    // Ekran görüntüsünü al ve kaydet
    await page.screenshot({ path: 'postion.png' });
+   await page.waitForTimeout(1000);
 
+   await page.waitForSelector('xpath=//*[@id="app-container"]/div[2]/div/div[1]/div[2]/div/table/div/tbody/tr[11]/div/div/td[3]/div/div/div/span', { timeout: 10000 });   
+   await page.click('xpath=//*[@id="app-container"]/div[2]/div/div[1]/div[2]/div/table/div/tbody/tr[11]/div/div/td[3]/div/div/div/span'); 
+   await page.waitForTimeout(3000);  
 
-
-  
  
 
 
@@ -251,4 +244,5 @@ const { login } = require('./login');
    } finally {
    await browser.close();
    }
+
 })();
