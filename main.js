@@ -44,7 +44,6 @@ ipcMain.handle('run-test', async (event, testType) => {
   
   // Test tipine göre çalıştırılacak dosyayı belirle
   switch(testType) {
-    
     case 'login':
       scriptFile = path.join(__dirname, 'test', 'login.js');
       break;
@@ -65,6 +64,9 @@ ipcMain.handle('run-test', async (event, testType) => {
       break;
     case 'position-recommended':
       scriptFile = path.join(__dirname, 'test', 'position-recommended.js');
+      break;
+    case 'altposition':
+      scriptFile = path.join(__dirname, 'test', 'altposition.js');
       break;
     default:
       return { success: false, message: `Geçersiz test tipi: ${testType}` };

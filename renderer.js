@@ -340,6 +340,11 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Önerilen Pozisyon test butonu tıklandı, position-recommended.js çalıştırılacak');
       await runTest('position-recommended');
     });
+
+    // renderer.js
+document.getElementById('altpositionTestBtn').addEventListener('click', async () => {
+  await runTest('altposition', 'Alt Pozisyon Testi');
+});
     
     
 

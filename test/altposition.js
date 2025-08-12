@@ -5,9 +5,12 @@ const { login } = require('./login');
 
   try {
 
-    // 1. Pozisyonlar sayfasına git
-    await page.click('xpath=//*[@id="app"]/div[1]/div[2]/div[1]/a/div/button');
+    await page.click('xpath=//*[@id="app-container"]/div[1]/div[1]/div/div/div/button');
     await page.waitForTimeout(5000);
+
+    await page.getByText('Tahir A.Ş').click();
+    await page.waitForTimeout(5000);
+
 
     // 2. İlk pozisyona tıkla
     await page.click('xpath=//*[@id="app-container"]/div[2]/div/div[1]/div[1]/div/div[1]/button');
@@ -28,7 +31,7 @@ const { login } = require('./login');
     const randomTitle = jobTitles[Math.floor(Math.random() * jobTitles.length)];
 
     // Input alanına rastgele başlığı yaz
-    await page.getByRole('textbox', { name: 'Job Posting Title' }).fill(randomTitle);
+    await page.getByRole('textbox', { name: 'İş İlanı Başlığı' }).fill(randomTitle);
     await page.waitForTimeout(500);
 
     // 4. Açılır menüye tıkla

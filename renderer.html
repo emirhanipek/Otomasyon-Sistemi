@@ -827,6 +827,21 @@
       transition: transform 0.15s, box-shadow 0.15s;
       padding: 0;
     }
+
+    /* Light Mode için */
+body.light-mode .main-test-btn {
+       /* beyaz zemin */
+  color: #111111;                 /* koyu yazı */
+}
+
+/* Dark Mode için */
+body.dark-mode .main-test-btn {
+  background-color: #1f1f1f;      /* koyu zemin */
+  color: #f0f0f0;                 /* açık yazı */
+}
+
+
+
     .main-test-btn:hover {
       transform: scale(1.04);
       box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
@@ -871,20 +886,24 @@
     .test-modal.active {
       display: flex;
     }
-    .test-modal-content {
-      background: #fff;
-      border-radius: 32px;
-      box-shadow: 0 8px 40px rgba(102, 126, 234, 0.18);
-      padding: 40px 32px 32px 32px;
-      min-width: 340px;
-      max-width: 95vw;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      animation: zoomIn 0.2s;
-    }
+  .test-modal-content {
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 8px 40px rgba(102, 126, 234, 0.18);
+  padding: 32px 24px 24px 24px; /* padding'i biraz küçülttük */
+  min-width: 340px;
+  max-width: 95vw;
+  min-height: 220px;
+  max-height: 80vh; /* maksimum yüksekliği azalt */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: zoomIn 0.2s;
+  margin: 40px 0; /* üstten ve alttan boşluk ekle */
+  overflow-y: auto;
+}
+
     .test-modal-title {
       font-size: 1.4rem;
       font-weight: 700;
@@ -1292,11 +1311,16 @@
       font-size: 1rem;
       background: #fff;
     }
+
+
+    
     .test-history-table th, .test-history-table td {
       padding: 10px 12px;
       border-bottom: 1px solid #e3e7fa;
       text-align: left;
     }
+
+    
     .test-history-table th {
       background: #f8f9fd;
       font-weight: 600;
@@ -1447,6 +1471,7 @@
         padding: 10px 0;
         font-size: 0.98rem;
       }
+      
     }
   </style>
 </head>
@@ -1560,9 +1585,21 @@
       </div>
       <button id="position-recommendedTestBtn" class="test-list-btn">Çalıştır</button>
     </li>
+    <li>
+  <div class="test-list-info">
+    <i class="fas fa-layer-group icon"></i>
+    <div>
+      <div class="test-list-title">Alt Pozisyon Testi</div>
+      <div class="test-list-desc">Alt pozisyon ekleme ve görüntülemeyi test eder.</div>
+    </div>
+  </div>
+  <button id="altpositionTestBtn" class="test-list-btn">Çalıştır</button>
+</li>
+      </div>
           </ul>
         </div>
-      </div>
+
+      
       <!-- Testler Modal Bitiş -->
        
       <div id="loading" class="loading">
@@ -1696,7 +1733,81 @@
     </div>
   </div>
 
+<title>Dark / Light Mode</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 2rem;
+    }
 
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    #toggleThemeBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      padding: 14px;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    #toggleThemeBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    #toggleThemeBtn:active {
+      transform: scale(0.95);
+    }
+
+    /* Light mode */
+    body.light-mode {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+ 
+  <button id="toggleThemeBtn">🌙</button>
+
+  <script>
+    const toggleButton = document.getElementById("toggleThemeBtn");
+    const body = document.body;
+
+    toggleButton.addEventListener("click", () => {
+      if (body.classList.contains("light-mode")) {
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        toggleButton.textContent = "☀️";
+      } else {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        toggleButton.textContent = "🌙";
+      }
+    });
+  </script>
 
   <script src="renderer.js"></script>
 </body>
