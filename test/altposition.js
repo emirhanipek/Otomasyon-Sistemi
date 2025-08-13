@@ -32,10 +32,10 @@ const { login } = require('./login');
 
     // Input alanına rastgele başlığı yaz
     await page.getByRole('textbox', { name: 'İş İlanı Başlığı' }).fill(randomTitle);
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(2000);
 
     // 4. Açılır menüye tıkla
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/div/div/span');
+    await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/div/div/span');
     await page.waitForTimeout(3000);
 
     // 5. Menuden seçenek seç
@@ -57,8 +57,8 @@ const { login } = require('./login');
     await page.waitForTimeout(3000);
 
      // 9. "Bir seçenek seçin" alanına tıkla
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span', { timeout: 10000 });
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span');
+    await page.waitForSelector('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span', { timeout: 10000 });
+    await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span');
     await page.waitForTimeout(3000);
 
     // 10. Açılan menüden ilk öğeyi seç
@@ -67,8 +67,8 @@ const { login } = require('./login');
     await page.waitForTimeout(3000);
 
     // 11. İlan türün alanına tıkla
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span', { timeout: 10000 });
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span');
+    await page.waitForSelector('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span', { timeout: 10000 });
+    await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span');
     await page.waitForTimeout(3000);
 
     // 12. Açılan menüden öğeyi seç
@@ -175,53 +175,53 @@ const { login } = require('./login');
    await page.waitForTimeout(5000);
 
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).click();
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).click();
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).fill('php');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).fill('php');
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(500)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).click();
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).click();
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).fill('JavaScript');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).fill('JavaScript');
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(500)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).click();
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).click();
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).fill('sql');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).fill('sql');
    await page.waitForTimeout(3000)
 
-   await page.getByRole('textbox', { name: 'Add keyword (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Anahtar Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(1000)
 
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).fill('liderlik');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).fill('liderlik');
    await page.waitForTimeout(1000)
 
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(1000)
 
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).fill('yonetim');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).fill('yonetim');
    await page.waitForTimeout(1000)
 
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(1000)
 
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).fill('iş gücü');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).fill('iş gücü');
    await page.waitForTimeout(1000)
  
-   await page.getByRole('textbox', { name: 'Add skill (Press enter to add)' }).press('Enter');
+   await page.getByRole('textbox', { name: 'Yetkinlik Ekle (Enter ile ekleyiniz)' }).press('Enter');
    await page.waitForTimeout(3000)
 
    
-   await page.locator('div').filter({ hasText: /^Select an option$/ }).click();
+   await page.locator('div').filter({ hasText: /^Bir seçenek seçin$/ }).click();
    await page.waitForTimeout(3000)
 
    await page.waitForSelector('xpath=/html/body/div[5]/div[3]/span', { timeout: 10000 });
@@ -229,8 +229,8 @@ const { login } = require('./login');
    await page.waitForTimeout(3000)
 
 
-   await page.waitForSelector('text="Save"', { timeout: 10000 });
-   await page.click('text="Save"');
+   await page.waitForSelector('text="Kaydet"', { timeout: 10000 });
+   await page.click('text="Kaydet"');
    await page.waitForTimeout(4000)
     
    // Ekran görüntüsünü al ve kaydet

@@ -276,6 +276,23 @@ if (closeHistoryDetailBtn && historyDetailModal) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  
+document.getElementById('runAllTestsBtn').addEventListener('click', async () => {
+  const testTypes = [
+    'login',
+    'cv',
+    'position',
+    'users',
+    'roles',
+    'reporting',
+    'position-recommended',
+    'altposition'
+  ];
+  const promises = testTypes.map(testType => runTest(testType, `${testType} Testi`));
+  await Promise.all(promises);
+  alert('Tüm testler aynı anda çalıştırıldı!');
+});
+  
   const loginBtn = document.getElementById('loginTestBtn');
   const cvBtn = document.getElementById('cvTestBtn');
   
@@ -291,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.style.transform = 'translateY(0)';
       }
     });
+    
   });
 
   // Sidebar toggle
@@ -346,6 +364,7 @@ document.getElementById('altpositionTestBtn').addEventListener('click', async ()
   await runTest('altposition', 'Alt Pozisyon Testi');
 });
     
+
     
 
 });
