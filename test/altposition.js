@@ -94,19 +94,17 @@ const { login } = require('./login');
 
     // Dropdown kapansın diye boş bir alana tıkla (örneğin sağ üst köşe)
     await page.mouse.click(1000, 10);  // 
-    await page.waitForTimeout(2000);
-
+    await page.waitForTimeout(3000);
 
     // 15. Çalışma modeli alanına tıkla 
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span', { timeout: 10000 });
-    await page.click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span');
+    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span', { timeout: 30000 });
+    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span');
     await page.waitForTimeout(3000);
 
     // Açılan seçeneklerden biri tıklanır 
     await page.waitForSelector('xpath=/html/body/div[5]/div[4]/span', { timeout: 10000 });
     await page.click('xpath=/html/body/div[5]/div[4]/span');
     await page.waitForTimeout(3000);
-
 
     await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/button/div', { timeout: 10000 });
     await page.click('xpath=/html/body/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/button/div');

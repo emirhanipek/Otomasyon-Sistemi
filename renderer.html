@@ -419,6 +419,45 @@
       margin-bottom: 20px;
     }
 
+    /* === Dark Mode === */
+body.dark-mode .result-container {
+  background: #1e2229;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .result-section {
+  border-bottom: 1px solid #2f3542;
+}
+
+body.dark-mode .result-section-header h3 {
+  color: #f0f0f0;
+}
+
+body.dark-mode .result-badge {
+  background: #2f3542;
+  color: #bbb;
+}
+
+body.dark-mode .result-badge.success {
+  background: rgba(0, 230, 168, 0.15);
+  color: #00e6a8;
+}
+
+body.dark-mode .result-badge.error {
+  background: rgba(255, 135, 135, 0.15);
+  color: #ff8787;
+}
+
+body.dark-mode .result-header {
+  color: #f0f0f0;
+}
+
+body.dark-mode .result-body {
+  background: #2b3038;
+  color: #e0e0e0;
+}
+
+
     .result-section-header h3 {
       font-size: 1.2rem;
       font-weight: 600;
@@ -1316,98 +1355,194 @@ body.light-mode .test-list-btn {
       }
     }
 
-    .test-history-section {
-      margin: 48px 0 0 0;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(35,42,92,0.08);
-      padding: 32px 24px;
-    }
-    .test-history-section h3 {
-      margin-bottom: 18px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #232a5c;
-    }
-    .test-history-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 1rem;
-      background: #fff;
-    }
+    /* === Test Geçmişi Ana Kutu === */
+.test-history-section {
+  margin: 48px 0 0 0;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(35,42,92,0.08);
+  padding: 24px;
+  overflow-x: auto;
+}
 
-    body.dark-mode .test-history-section {
-  background: #23272f;
+.test-history-section h3 {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #232a5c;
+  border-left: 5px solid #667eea;
+  padding-left: 12px;
+}
+
+/* === Modern Tablo === */
+.test-history-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px; /* Satırlar arası boşluk */
+  font-size: 1rem;
+  min-width: 700px;
+}
+
+.test-history-table thead tr th {
+  text-align: left;
+  font-weight: 600;
+  padding: 12px;
+  color: #555;
+  background: transparent;
+  border-bottom: 2px solid #e3e7fa;
+}
+
+.test-history-table tbody tr {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
+}
+
+.test-history-table tbody tr:hover {
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.test-history-table td {
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+/* İlk ve son hücrelerde yuvarlak köşe */
+.test-history-table tbody tr td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.test-history-table tbody tr td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* Başarı / hata stilleri */
+.test-history-table .success {
+  color: #00b894;
+  font-weight: 700;
+}
+.test-history-table .success::before {
+  content: "✔ ";
+}
+.test-history-table .error {
+  color: #ff6b6b;
+  font-weight: 700;
+}
+.test-history-table .error::before {
+  content: "✖ ";
+}
+
+/* Buton */
+.test-history-table .detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+.test-history-table .detail-btn:hover {
+  background: linear-gradient(135deg, #5a67d8, #5e3b92);
+  transform: translateY(-1px);
+}
+
+/* === Dark Mode === */
+body.dark-mode .test-history-section {
+  background: #1e2229;
   color: #f0f0f0;
-  box-shadow: 0 2px 12px rgba(35,42,92,0.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 
 body.dark-mode .test-history-section h3 {
   color: #fff;
+  border-left-color: #667eea;
 }
 
-body.dark-mode .test-history-table {
-  background: #23272f;
-  color: #f0f0f0;
+body.dark-mode .test-history-table tbody tr {
+  background: #2b3038;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-body.dark-mode .test-history-table th {
-  background: #353a45;
-  color: #f0f0f0;
+body.dark-mode .test-history-table tbody tr:hover {
+  background: #323843;
 }
 
 body.dark-mode .test-history-table td {
   color: #e0e0e0;
 }
 
+body.dark-mode .test-history-table thead tr th {
+  color: #f0f0f0;
+  border-bottom-color: #3a3f4a;
+}
+
 body.dark-mode .test-history-table .success {
-  color: #00b894;
+  color: #00e6a8;
 }
 
 body.dark-mode .test-history-table .error {
-  color: #ff6b6b;
+  color: #ff8787;
 }
 
-    
-    .test-history-table th, .test-history-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid #e3e7fa;
-      text-align: left;
-    }
+body.dark-mode .test-history-table .detail-btn {
+  background: linear-gradient(135deg, #5a67d8, #764ba2);
+}
 
-    
-    .test-history-table th {
-      background: #f8f9fd;
-      font-weight: 600;
-      color: #232a5c;
-    }
-    .test-history-table tr:last-child td {
-      border-bottom: none;
-    }
-    .test-history-table td {
-      color: #232a5c;
-    }
-    .test-history-table .success {
-      color: #00b894;
-      font-weight: 700;
-    }
-    .test-history-table .error {
-      color: #ff6b6b;
-      font-weight: 700;
-    }
-    .test-history-table .detail-btn {
-      background: #667eea;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 16px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: background 0.2s;
-    }
-    .test-history-table .detail-btn:hover {
-      background: #232a5c;
-    }
+body.dark-mode .test-history-table .detail-btn:hover {
+  background: linear-gradient(135deg, #4c51bf, #5e3b92);
+}
+
+/* Mobil görünüm için dark mode uyumu */
+@media (max-width: 768px) {
+  body.dark-mode .test-history-table tr {
+    background: #2b3038;
+  }
+  body.dark-mode .test-history-table td::before {
+    color: #bbb;
+  }
+}
+
+
+/* === Mobilde kart görünümü === */
+@media (max-width: 768px) {
+  .test-history-table thead {
+    display: none;
+  }
+  .test-history-table,
+  .test-history-table tbody,
+  .test-history-table tr,
+  .test-history-table td {
+    display: block;
+    width: 100%;
+  }
+  .test-history-table tr {
+    margin-bottom: 16px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .test-history-table td {
+    padding: 8px 0;
+    border: none;
+  }
+  .test-history-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #555;
+  }
+}
+
     .dashboard-header-bar {
       background: linear-gradient(90deg, #e3e7fa 0%, #f8f9fd 100%);
       box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
@@ -1572,7 +1707,6 @@ body.dark-mode .dashboard-header-bar .dashboard-subtitle {
   <div class="main-layout">
     <!-- Sidebar kaldırıldı -->
     <div class="container">
-      <button id="toggleThemeBtn" class="theme-toggle-btn">🌙</button>
       <div class="dashboard-header-bar">
         <h2>Test Otomasyon Kontrol Paneli</h2> 
         <p class="dashboard-subtitle">Test süreçlerinizi yönetin ve izleyin</p>
@@ -1725,11 +1859,7 @@ body.dark-mode .dashboard-header-bar .dashboard-subtitle {
             </div>
           </div>
         </div>
-        <div class="result-section">
-          <div class="result-section-header">
-            <h3>Ekran Görüntüleri</h3>
-          </div>
-          <div class="screenshots-container">
+      
             <!-- Login Test Screenshot Section -->
             <div id="loginScreenshotSection" style="display: none;">
               <div class="screenshot-header">
