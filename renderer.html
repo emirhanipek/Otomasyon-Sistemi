@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
+    
     * {
       margin: 0;
       padding: 0;
@@ -960,6 +961,28 @@ body.dark-mode .main-test-btn {
       align-items: center;
       justify-content: center;
     }
+
+body.light-mode .test-modal-content {
+  background: #fff !important;
+  color: #232a5c !important;
+}
+body.light-mode .test-modal-title {
+  color: #232a5c !important;
+}
+body.light-mode .test-list-modern li {
+  background: #f8f9fd !important;
+}
+body.light-mode .test-list-title {
+  color: #232a5c !important;
+}
+body.light-mode .test-list-desc {
+  color: #667eea !important;
+}
+body.light-mode .test-list-btn {
+  background: #00b894 !important;
+  color: #fff !important;
+}
+
     .close-modal-btn:hover {
       color: #e17055;
       background: #f8f9fd;
@@ -1292,6 +1315,7 @@ body.dark-mode .main-test-btn {
         right: -10px;
       }
     }
+
     .test-history-section {
       margin: 48px 0 0 0;
       background: #fff;
@@ -1312,6 +1336,37 @@ body.dark-mode .main-test-btn {
       background: #fff;
     }
 
+    body.dark-mode .test-history-section {
+  background: #23272f;
+  color: #f0f0f0;
+  box-shadow: 0 2px 12px rgba(35,42,92,0.18);
+}
+
+body.dark-mode .test-history-section h3 {
+  color: #fff;
+}
+
+body.dark-mode .test-history-table {
+  background: #23272f;
+  color: #f0f0f0;
+}
+
+body.dark-mode .test-history-table th {
+  background: #353a45;
+  color: #f0f0f0;
+}
+
+body.dark-mode .test-history-table td {
+  color: #e0e0e0;
+}
+
+body.dark-mode .test-history-table .success {
+  color: #00b894;
+}
+
+body.dark-mode .test-history-table .error {
+  color: #ff6b6b;
+}
 
     
     .test-history-table th, .test-history-table td {
@@ -1366,6 +1421,20 @@ body.dark-mode .main-test-btn {
       min-width: 220px;
       transition: box-shadow 0.2s;
     }
+
+body.dark-mode .dashboard-header-bar {
+  background: linear-gradient(90deg, #23272f 0%, #353a45 100%);
+  box-shadow: 0 4px 24px rgba(35, 42, 92, 0.18);
+}
+
+body.dark-mode .dashboard-header-bar h2 {
+  color: #f0f0f0;
+}
+
+body.dark-mode .dashboard-header-bar .dashboard-subtitle {
+  color: #b0b0b0;
+}
+
     .dashboard-header-bar h2 {
       font-size: 1.25rem;
       font-weight: 800;
@@ -1464,6 +1533,11 @@ body.dark-mode .main-test-btn {
       outline: none;
     }
 
+    .test-list-title {
+  color: #00b894; /* Tüm başlıklar için yeşil ton */
+  font-weight: bold;
+}
+
     .test-list-btn:hover {
       background: #232a5c;
       color: #fff;
@@ -1491,8 +1565,6 @@ body.dark-mode .main-test-btn {
         display: block;
       }
 
-
-
     }
   </style>
 </head>
@@ -1500,8 +1572,9 @@ body.dark-mode .main-test-btn {
   <div class="main-layout">
     <!-- Sidebar kaldırıldı -->
     <div class="container">
+      <button id="toggleThemeBtn" class="theme-toggle-btn">🌙</button>
       <div class="dashboard-header-bar">
-        <h2>Test Otomasyon Kontrol Paneli</h2>
+        <h2>Test Otomasyon Kontrol Paneli</h2> 
         <p class="dashboard-subtitle">Test süreçlerinizi yönetin ve izleyin</p>
       </div>
       <!-- Testler Ana Butonu Başlangıç -->
@@ -1509,7 +1582,7 @@ body.dark-mode .main-test-btn {
         <div class="main-test-btns-row upper-row">
           <button id="openTestModalBtn" class="main-test-btn">
             <img src="cvusLogo.png" alt="CV US Logo" class="main-test-logo" />
-            <span class="main-test-title">CV US</span>
+            <span class="main-test-title">CV US</span> 
           </button>
           <button class="main-test-btn svg-btn">
             <img src="Logo.svg" alt="Logo SVG" class="main-test-logo" />
@@ -1755,7 +1828,7 @@ body.dark-mode .main-test-btn {
     </div>
   </div>
 
-<title>Dark / Light Mode</title>
+
   <style>
     body {
       margin: 0;
@@ -1804,7 +1877,7 @@ body.dark-mode .main-test-btn {
 
     /* Dark mode */
     body.dark-mode {
-      background-color: #121212;
+      background-color: #23272f;
       color: #f0f0f0;
     }
   </style>

@@ -36,55 +36,55 @@ const { login } = require('./login');
 
     // 4. Açılır menüye tıkla
     await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/div/div/span');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 5. Menuden seçenek seç
     await page.click('xpath=/html/body/div[5]/div[2]');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 6. Tarih seçici inputa tıkla
     await page.click('[data-test-id="dp-input"]');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 7. İleri tarih butonunu bekle ve tıkla
     await page.waitForSelector('xpath=/html/body/div[4]/div/div[2]/div/div/div/div[1]/div/button[2]');
     await page.click('xpath=/html/body/div[4]/div/div[2]/div/div/div/div[1]/div/button[2]');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 8. İstenen tarihi bekle ve seç
     await page.waitForSelector('xpath=/html/body/div[4]/div/div[2]/div/div/div/div[2]/div/div[3]/div[2]/div[7]/div');
     await page.click('xpath=/html/body/div[4]/div/div[2]/div/div/div/div[2]/div/div[3]/div[2]/div[7]/div');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
      // 9. "Bir seçenek seçin" alanına tıkla
     await page.waitForSelector('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span', { timeout: 10000 });
     await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[5]/div/div/span');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 10. Açılan menüden ilk öğeyi seç
     await page.waitForSelector('xpath=/html/body/div[5]/div[2]', { timeout: 10000 });
     await page.click('xpath=/html/body/div[5]/div[2]');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 11. İlan türün alanına tıkla
     await page.waitForSelector('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span', { timeout: 10000 });
     await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[6]/div/div/span');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 12. Açılan menüden öğeyi seç
     await page.waitForSelector('xpath=/html/body/div[5]/div[2]', { timeout: 10000 });
     await page.click('xpath=/html/body/div[5]/div[2]');
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // 13. Pozisyon açıklaması alanına tıkla
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[7]/div/div[2]/input');
+    await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[7]/div/div[2]/input');
     await page.waitForTimeout(1000);
-    await page.fill('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[7]/div/div[2]/input', '2');
-    await page.waitForTimeout(3000);
+    await page.fill('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[7]/div/div[2]/input', '2');
+    await page.waitForTimeout(2000);
 
    // 14. Pozisyon sorumluları
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[8]/div/div/span', { timeout: 10000 });
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[8]/div/div/span');
+    await page.waitForSelector('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[8]/div/div/span', { timeout: 10000 });
+    await page.click('xpath=/html/body/div[2]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[8]/div/div/span');
     await page.waitForTimeout(3000);
 
     // Açılır menüden öğeyi seç (örnek: Uzaktan)
@@ -98,8 +98,8 @@ const { login } = require('./login');
 
 
     // 15. Çalışma modeli alanına tıkla 
-    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span', { timeout: 10000 });
-    await page.click('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span');
+    await page.waitForSelector('xpath=/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span', { timeout: 10000 });
+    await page.click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div/div/div/div/div[9]/div/div/span/span');
     await page.waitForTimeout(3000);
 
     // Açılan seçeneklerden biri tıklanır 
